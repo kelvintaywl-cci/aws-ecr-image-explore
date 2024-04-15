@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  ecr-creds-from-envvar:
+    docker:
+      # NOTE: private image on AWS ECR. it is basically the cimg/base:2024.01 Docker image.
+      - image: 992382483259.dkr.ecr.us-east-1.amazonaws.com/kelvintaywl-cci/cimg/base:2024.01
+    steps:
+      - checkout
+
+workflows:
+  ecr:
+    jobs:
+      # AWS credentials via project env vars
+      # See https://circleci.com/docs/private-images/#aws-ecr
+      - ecr-creds-from-envvar
